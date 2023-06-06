@@ -14,21 +14,21 @@ Then:
 
 ## DOCUMENTATION:
 
-'api/tags/'<br>
+`api/tags/`<br>
 METHODS: 'GET'<br>
 List all Tags
 
 ***
-'api/signup/'<br>
-METHODS: 'POST'.<br>
+`api/signup/`<br>
+METHODS: `POST`.<br>
 
 Create a user and retrive a token authentication.<br>
 
 A .json body with fields 'username'
 and 'password' is required.
 ***
-'api/login/'<br>
-METHODS: 'POST'.<br>
+`'api/login/'`<br>
+METHODS: `POST`.<br>
 
 Get User credentials and return a authenticatio token
 if User is authenticated.
@@ -36,12 +36,12 @@ if User is authenticated.
 A .json body with fields 'username' and 'password'
 is 'required'.
 ***
-'api/profile/'<br>
+`api/profile/`<br>
 METHODS: 'POST'.<br>
 An Authorization header with user's token is required.
 e.g: 'Authorization: Token <token>'.
 
-POST:<br>
+`POST`:<br>
 Create a Profile for User.
 
 A .json body with fields: 'user_id', 'description' and 'birth_age'
