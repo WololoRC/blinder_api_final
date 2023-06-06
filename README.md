@@ -12,7 +12,7 @@ Then:
 ./manage.py runserver
 ```
 
-DOCUMENTATION:
+## DOCUMENTATION:
 
 'api/tags/'
 METHODS: 'GET'
