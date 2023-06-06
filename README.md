@@ -33,8 +33,8 @@ METHODS: 'POST'.<br>
 Get User credentials and return a authenticatio token
 if User is authenticated.
 
-A .json body with fields 'username' and 'password
-is required'.
+A .json body with fields 'username' and 'password'
+is 'required'.
 ***
 'api/profile/'<br>
 METHODS: 'POST'.<br>
