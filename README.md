@@ -15,7 +15,7 @@ Then:
 ## DOCUMENTATION:
 
 `api/tags/`<br>
-METHODS: 'GET'<br>
+METHODS: `GET`<br>
 List all Tags
 
 ***
@@ -37,7 +37,7 @@ A .json body with fields 'username' and 'password'
 is 'required'.
 ***
 `api/profile/`<br>
-METHODS: 'POST'.<br>
+METHODS: `POST`.<br>
 An Authorization header with user's token is required.
 e.g: 'Authorization: Token <token>'.
 
