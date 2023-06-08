@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = User
-        fields = ['username', 'pk']
+        fields = ['username']
 
 class ProfileSerializer(serializers.ModelSerializer):
     """
@@ -33,5 +33,5 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     def get_age(self, obj):
         today = date.today()
-        return today.year - obj.birth_age.year
+        return today.year - obj.birth_date.year
 

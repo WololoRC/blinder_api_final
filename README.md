@@ -30,7 +30,7 @@ and 'password' is required.
 'api/login/'<br>
 METHODS: 'POST'.<br>
 
-Get User credentials and return a authenticatio token
+Get User credentials and return a authenticatio token and users id
 if User is authenticated.
 
 A .json body with fields 'username' and 'password
@@ -48,3 +48,5 @@ A .json body with fields: 'user_id', 'description' and 'birth_age'
 is required.
 
 birth_age must have this format '1997-2-4'.
+
+Returns users Profile

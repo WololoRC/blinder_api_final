@@ -7,11 +7,11 @@ ROUTS:
 ..........................................................
 'api/signup/': METHODS: 'POST'.
 
-    Create a user and retrive a token authentication.
+    Create an authenticated User and retrive his Profile data.
 
-    A .json body with fields 'username'
-    and 'password' is required.
-..........................................................
+    A .json body with fields 'username', 'password'
+    and 'birth_date' is required.
+    ..........................................................
 'api/login/': METHODS: 'POST'.
 
     Get User credentials and return a authenticatio token
@@ -20,23 +20,45 @@ ROUTS:
     A .json body with fields 'username' and 'password
     is required'.
 ..........................................................
-'api/profile/': METHODS: 'POST'.
+'profile/<uuid:profile_id>/': METHODS: 'GET', 'PUT'.
 
-    An Authorization header with user's token is required.
-    e.g: 'Authorization: Token <token>'.
+PUT:
+---
+    Update Profile tags and description, send a .json body
+    with fields:
+    - 'remove_tags': <Tag's UUID's'>
+        delete tags.
 
-    POST:
-        Create a Profile for User.
+    - 'add_tags': <Tag's UUID's>.
+        add tags.
 
-        A .json body with fields: 'user_id', 'description' and 'birth_age'
-        is required.
+    - 'description': str.
+        change description.
 
-        birth_age must have this format '1997-2-4'.
+    On success returns a updated Profile instance,
+    else an error message.
+
+GET:
+---
+    Get user Profile on success, else a error message.
+..........................................................
+'profile/delete/<uuid:profile_id>/': METHODS: 'DELETE'.
+
+    An a Autorization header with Token <user-token>
+    is required.
+
+    Deletes a user Profile.
+
+    On success return a http 204 status or a error message
+    if fails.
+
+
 """
 
 
 urlpatterns = [
     path('signup/', views.signup),
     path('login/', views.login),
-    path('profile/', views.profile_settings)
+    path('profile/<uuid:profile_id>/', views.profile_settings),
+    path('profile/delete/<uuid:profile_id>/', views.delete_profile)
 ]
