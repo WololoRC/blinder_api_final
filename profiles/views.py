@@ -193,3 +193,4 @@ def delete_profile(request, profile_id):
             status=status.HTTP_400_BAD_REQUEST
         )
 
+# feed view comes here

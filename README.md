@@ -12,41 +12,95 @@ Then:
 ./manage.py runserver
 ```
 
-## DOCUMENTATION:
+# Models
 
-`api/tags/`<br>
-METHODS: `GET`<br>
-List all Tags
+## Profiles
 
-***
+### Atributes:
+
+`user`: User.id related instance.<br>
+
+`description`: Description of profile, is a string value.<br>
+
+`owner_tags`: Instances of `Tags` related to User Profile.<br>
+
+`birth_age`: birth age of User, when you create
+a new instance of Profile insert data
+as follows: (%Y/%m/%d) datetype.<br>
+
+`id`: UUID relates to Profile instance.
+
+# Tags
+
+### Atributes:
+
+`tag_name`: Name of a Tags instance, is a string value.<br>
+`id`: UUID related to Tags instance.
+
+# Documentation.
+
+## Profile managment:
+
+### Routs:
+
 `api/signup/`<br>
-METHODS: `POST`.<br>
+### METHOD: `POST`.<br>
 
-Create a user and retrive a token authentication.<br>
+Create an authenticated User instance  with Profile Instance.<br>
 
-A .json body with fields 'username'
-and 'password' is required.
+A payload on request body with fields 'username', 'password' and 'birth_date' is required.<br>
+
+Return:<br>
+If Users's username does not exist return a new Profile instance data with
+Authentication Token, else a error message.<br>
 ***
-`'api/login/'`<br>
-METHODS: `POST`.<br>
 
-Get User credentials and return a authenticatio token and users id
-if User is authenticated.
+`api/login/`<br>
+### METHOD: `POST`.<br>
 
-A .json body with fields 'username' and 'password'
-is 'required'.
+Get User Authentication.
+
+Returns:<br>
+User's Profile Authentication Token,  username and id on success.
+Else a error message if fails.<br>
 ***
-`api/profile/`<br>
-METHODS: `POST`.<br>
-An Authorization header with user's token is required.
-e.g: 'Authorization: Token <token>'.
 
-`POST`:<br>
-Create a Profile for User.
+`profile/<uuid:profile_id>/`<br>
+### METHODS: `GET`, `PUT`.
 
-A .json body with fields: 'user_id', 'description' and 'birth_age'
-is required.
+`PUT`:<br>
+Update Profile tags and description, send a payload on body
+request with fields:<br>
 
-birth_age must have this format '1997-2-4'.
+`remove_tags: <Tag's UUID's'>` delete tags. <br>
 
-Returns users Profile
+`add_tags: <Tag's UUID's>` add tags. <br>
+
+`description: <str>`. change description. <br>
+
+Returns: <br>
+On success a updated Profile instance data, else an error message. <br>
+
+`GET`:<br>
+
+Get a Profile instance on detail.<br>
+
+Returns: <br>
+User's Profile data on success, else a error message.<br>
+***
+
+`api/profile/delete/<uuid:profile_id>` <br>
+
+### METHOD: `DELETE`. <br>
+
+Delete a Profile instance. <br>
+
+Returns: <br>
+On success return a http 204 status or a error message if fails. <br>
+
+
+
+
+
+
+
