@@ -50,7 +50,7 @@ Create an authenticated User instance  with Profile Instance.<br>
 
 A payload on request body with fields 'username', 'password' and 'birth_date' is required.<br>
 
-Return:<br>
+### Return:<br>
 If Users's username does not exist return a new Profile instance data with
 Authentication Token, else a error message.<br>
 ***
@@ -60,7 +60,7 @@ Authentication Token, else a error message.<br>
 
 Get User Authentication.
 
-Returns:<br>
+### Returns:<br>
 User's Profile Authentication Token,  username and id on success.
 Else a error message if fails.<br>
 ***
@@ -78,14 +78,14 @@ request with fields:<br>
 
 `description: <str>`. change description. <br>
 
-Returns: <br>
+### Returns: <br>
 On success a updated Profile instance data, else an error message. <br>
 
 `GET`:<br>
 
 Get a Profile instance on detail.<br>
 
-Returns: <br>
+### Returns: <br>
 User's Profile data on success, else a error message.<br>
 ***
 
@@ -95,9 +95,18 @@ User's Profile data on success, else a error message.<br>
 
 Delete a Profile instance. <br>
 
-Returns: <br>
+### Returns: <br>
 On success return a http 204 status or a error message if fails. <br>
+***
 
+`api/tags/`
+
+### METHOD: `GET`. <br>
+
+List al Tags instaces.
+
+### Returns: <br>
+All Tags instaces.<br>
 
 
 
