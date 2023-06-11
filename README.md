@@ -43,7 +43,7 @@ as follows: (%Y/%m/%d) datetype.<br>
 
 ### Routs:
 
-### `api/signup/`<br>
+### `/api/signup/`<br>
 ### METHOD: `POST`.<br>
 
 Create an authenticated User instance  with Profile Instance.<br>
@@ -55,7 +55,7 @@ If Users's username does not exist return a new Profile instance data with
 Authentication Token, else a error message.<br>
 ***
 
-### `api/login/`<br>
+### `/api/login/`<br>
 ### METHOD: `POST`.<br>
 
 Get User Authentication.
@@ -65,7 +65,7 @@ User's Profile Authentication Token,  username and id on success.
 Else a error message if fails.<br>
 ***
 
-### `profile/<uuid:profile_id>/`<br>
+### `/profile/<uuid:profile_id>/`<br>
 ### METHODS: `GET`, `PUT`.
 
 `PUT`:<br>
@@ -89,7 +89,7 @@ Get a Profile instance on detail.<br>
 User's Profile data on success, else a error message.<br>
 ***
 
-### `api/profile/delete/<uuid:profile_id>` <br>
+### `/api/profile/delete/<uuid:profile_id>` <br>
 ### METHOD: `DELETE`. <br>
 
 Delete a Profile instance. <br>
@@ -98,7 +98,7 @@ Delete a Profile instance. <br>
 On success return a http 204 status or a error message if fails. <br>
 ***
 
-### `api/tags/` <br>
+### `/api/tags/` <br>
 ### METHOD: `GET`. <br>
 
 List al Tags instaces.
