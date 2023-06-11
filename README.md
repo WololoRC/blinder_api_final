@@ -18,19 +18,19 @@ Then:
 
 ### Atributes:
 
-`user`: User.id related instance.<br>
+`user`: `User.id` related instance.<br>
 
-`description`: Description of profile, is a string value.<br>
+`description`: Description of profile, is a `string` value.<br>
 
 `owner_tags`: Instances of `Tags` related to User Profile.<br>
 
 `birth_age`: birth age of User, when you create
 a new instance of Profile insert data
-as follows: (%Y/%m/%d) datetype.<br>
+as follows: (%Y/%m/%d).<br>
 
-`id`: UUID relates to Profile instance.
+`id`: UUID related to Profile instance.
 
-# Tags
+## Tags
 
 ### Atributes:
 
