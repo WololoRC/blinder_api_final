@@ -24,7 +24,7 @@ Then:
 
 `owner_tags`: Instances of `Tags` related to User Profile.<br>
 
-`birth_age`: birth age of User, when you create
+`birth_date`: birth date of User, when you create
 a new instance of Profile insert data
 as follows: (%Y/%m/%d).<br>
 
