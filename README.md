@@ -89,7 +89,7 @@ Get a Profile instance on detail.<br>
 User's Profile data on success, else a error message.<br>
 ***
 
-### `/api/profile/delete/<uuid:profile_id>` <br>
+### `/api/profile/delete/<uuid:profile_id>/` <br>
 ### METHOD: `DELETE`. <br>
 
 Delete a Profile instance. <br>
