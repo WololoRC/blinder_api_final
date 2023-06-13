@@ -3,7 +3,7 @@ REST API for Blinder project.
 
 Instructions for development and testing purposes.
 
-On the virtualization that are you using install
+On the virtualization that you are using install
 ```django```,```djangorestframework```,```requests```
 
 Then:
