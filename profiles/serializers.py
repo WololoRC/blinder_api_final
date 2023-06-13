@@ -19,7 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     """
-    ProfileSerializer.
+    Profile Serializer.
 
     Contains User and Tags serializations, age and description.
     """
@@ -34,4 +34,3 @@ class ProfileSerializer(serializers.ModelSerializer):
     def get_age(self, obj):
         today = date.today()
         return today.year - obj.birth_date.year
-

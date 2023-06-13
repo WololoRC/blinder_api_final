@@ -46,7 +46,8 @@ as follows: (%Y/%m/%d).<br>
 ### `/api/signup/`<br>
 ### METHOD: `POST`.<br>
 
-Create an authenticated User instance  with Profile Instance.<br>
+Create an authenticated User instance with Profile Instance.<br>
+Also creates a BlockedUsers table for User. <br>
 
 A payload on request body with fields 'username', 'password' and 'birth_date' is required.<br>
 
@@ -101,13 +102,39 @@ On success return a http 204 status or a error message if fails. <br>
 ### `/api/tags/` <br>
 ### METHOD: `GET`. <br>
 
-List al Tags instaces.
+List all Tags instaces.
 
 ### Returns: <br>
 All Tags instaces.<br>
 
+***
 
+### `profile/blocked_list/<uuid:profile_id>/` <br>
+### METHOD: `GET`. <br>
 
+Get data from User BlockedUsers table.
 
+### Returns: <br>
+A dict of blocked users with key's value's {<user.name>: <user.id>}
+from BlockedUsers table.
+***
 
+### `profile/blocked_list/update/<uuid:profile_id>/` <br>
+### METHODS: `PUT`, `DELETE`.
+
+METHODS: `PUT`, `DELETE`
+
+A payload called `id_list` with a list of valid UUID's
+is required. <br>
+
+Returns: <br>
+A dict of blocked users on success,
+a error message if 'profile_id' or 'id_list' have
+invalid data. <br>
+
+`PUT`: <br>
+Add Users to BlockedUsers main User table. <br>
+
+`DELETE`: <br>
+Remove Users of BlockedUsers main User Table. <br>
 

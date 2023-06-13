@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from .models import Profile
+from .models import Profile, BlockedUsers
 from tags.models import Tags
 from .serializers import ProfileSerializer
 from datetime import datetime
@@ -25,8 +25,13 @@ def signup(request):
         Create an authenticated User with Profile
         and retrive his Profile data.
 
+        Also set a BlockedUsers table for user.
+
         A .json body with fields 'username', 'password'
         and 'birth_date' is required.
+
+        Returns:
+            User credential on success, a ugly error message if fails.
     """
     try:
         data = request.data
@@ -45,6 +50,8 @@ def signup(request):
         )
 
         profile.save()
+        blocker_users = BlockedUsers(owner=profile)
+        blocker_users.save()
 
         return Response(
             {
@@ -58,6 +65,13 @@ def signup(request):
     except IntegrityError:
         return Response(
             {'error': 'username taken. chose another'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    except TypeError:
+        user.delete()
+        return Response(
+            {"error": "put a correct 'birth_date' with content '%Y-%d-%m' you stupid."},
             status=status.HTTP_400_BAD_REQUEST
         )
 
@@ -91,7 +105,8 @@ def login(request):
 
     token = Token.objects.get(user=user)
     return Response(
-            {'token': str(token), 'username': user.username, "id": profile.id}
+            {'token': str(token), 'username': user.username, "id": profile.id},
+            status.HTTP_200_OK
     )
 
 @api_view(['GET','PUT'])
