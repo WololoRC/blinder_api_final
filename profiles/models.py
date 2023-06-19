@@ -37,10 +37,24 @@ class BlockedUsers(models.Model):
 
     ATRIBUES:
     ---------
-    user:
+    owner:
         owner of the record.
     blocked_list:
         list of blocked users.
     """
-    owner = models.OneToOneField(Profile, related_name='owner' ,on_delete=models.CASCADE)
+    owner = models.OneToOneField(Profile, related_name='owner', on_delete=models.CASCADE)
     blocked_list = models.ManyToManyField(Profile, blank=True)
+
+class LikeUsers(models.Model):
+    """
+    A table for liked profiles
+
+    ATRIBUES:
+    ---------
+    owner:
+        owner of the record.
+    liked_list:
+        list of liked users.
+    """
+    owner = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    like_list = models.ManyToManyField(Profile, related_name='like_list', blank=True)
