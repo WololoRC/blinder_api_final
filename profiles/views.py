@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from .models import Profile, BlockedUsers
+from .models import Profile, BlockedUsers, LikeUsers
 from tags.models import Tags
 from .serializers import ProfileSerializer
 from datetime import datetime
@@ -50,8 +50,12 @@ def signup(request):
         )
 
         profile.save()
-        blocker_users = BlockedUsers(owner=profile)
-        blocker_users.save()
+
+        blocked_users = BlockedUsers(owner=profile)
+        like_users = LikeUsers(owner=profile)
+
+        blocked_users.save()
+        like_users.save()
 
         return Response(
             {
@@ -147,15 +151,15 @@ def profile_settings(request, profile_id):
         serializer = ProfileSerializer(profile)
 
         # if there are some tags to remove.
-        if 'remove_tags' in data:
+        if 'remove_tags' in data and 'description' in data:
             tags = Tags.objects.filter(id__in=data.get('remove_tags', []))
             profile.owner_tags.remove(*tags)
-
+            profile.description = data.get('description')
         # if we want add some tags.
-        elif 'add_tags' in data:
+        elif 'add_tags' in data and 'description' in data:
             tags = Tags.objects.filter(id__in=data.get('add_tags', []))
             profile.owner_tags.add(*tags)
-
+            profile.description = data.get('description')
         # change description
         elif 'description' in data:
             profile.description = data.get('description')
