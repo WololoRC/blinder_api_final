@@ -146,9 +146,16 @@ def profile_settings(request, profile_id):
     """
 
     if request.method == 'PUT':
-        data = request.data
-        profile = Profile.objects.get(id=profile_id)
-        serializer = ProfileSerializer(profile)
+        try:
+            data = request.data
+            profile = Profile.objects.get(id=profile_id)
+            serializer = ProfileSerializer(profile)
+
+        except (Profile.DoesNotExist, ValidationError):
+            return Response(
+                {'error': 'User does not exist'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         # if there are some tags to remove.
         if 'remove_tags' in data and 'description' in data:
@@ -180,7 +187,7 @@ def profile_settings(request, profile_id):
 
             return Response(serializer.data)
 
-        except Profile.DoesNotExist:
+        except (Profile.DoesNotExist, ValidationError):
             return Response(
                 {'error': 'User does not exist'},
                 status=status.HTTP_400_BAD_REQUEST
@@ -206,10 +213,35 @@ def delete_profile(request, profile_id):
             status=status.HTTP_204_NO_CONTENT
         )
 
-    except Profile.DoesNotExist:
+    except (Profile.DoesNotExist, ValidationError):
         return Response(
             {'error': 'User does not exist'},
             status=status.HTTP_400_BAD_REQUEST
         )
 
-# feed view comes here
+@api_view(['GET'])
+def get_feed(request, profile_id):
+    """
+    Get feed!!
+
+    Get a Profile list for populate the feed.
+
+    Returns:
+    On success all Profile excluding the Profiles inside of
+    LikeUsers and BlockedUsers, else a error message.
+    """
+    try:
+        profile = Profile.objects.get(id=profile_id)
+        like = LikeUsers.objects.get(owner=profile)
+        block = BlockedUsers.objects.get(owner=profile)
+
+        this_tags = [item.id for item in like.like_list.all()]
+        this_tags.extend([item.id for item in block.blocked_list.all()])
+        this_tags.extend([profile.id])
+
+    except (Profile.DoesNotExist, ValidationError):
+        return Response({'error': '{profile_id} is not valid, done be stupid.'})
+
+    feed = Profile.objects.exclude(id__in=this_tags)
+
+    return Response(ProfileSerializer(feed, many=True).data)

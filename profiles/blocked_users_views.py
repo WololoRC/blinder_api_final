@@ -32,7 +32,10 @@ def get_blocked_users(request, profile_id):
         for item in user_list:
             blocked_dict.update({f"{item.user}": f"{item.id}"})
 
-        return Response(blocked_dict, status=status.HTTP_200_OK)
+        return Response(
+                {'blocked_list': blocked_dict},
+                status=status.HTTP_200_OK
+        )
 
     except Profile.DoesNotExist:
         return Response(

@@ -18,5 +18,7 @@ urlpatterns = [
         'profile/blocked_list/update/<uuid:profile_id>/',
         blocked_users_views.put_or_delete_blocked_users
     ),
-    path('profile/like_list/<uuid:profile_id>/', like_views.update_list)
+    path('profile/like_list/update/<uuid:profile_id>/', like_views.update_list),
+    path('profile/like_list/<uuid:profile_id>/', like_views.get_list),
+    path('profile/feed/<uuid:profile_id>/', views.get_feed)
 ]
