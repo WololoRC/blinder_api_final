@@ -85,7 +85,7 @@ A model to record messages witihn two users, goes inside Chat table. <br>
 
 # Documentation.
 
-## Profile managment:
+# Profile managment:
 
 ### Routs:
 
