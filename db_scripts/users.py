@@ -1,13 +1,22 @@
 #!/usr/bin/python3
 import requests
 import json
-"""Create some users for testing and development"""
+"""
+=================================
+Puebla la db con varios usuarios.
+=================================
+
+Para usar este script debes cambiar el valor de la
+variable @port por el numer0 del puerto donde
+tengas levantada la API.
+"""
 
 
 user_list = []
+port = 8000
 
 for x in range(25):
-    url = "http://127.0.0.1:8000/api/signup/"
+    url = f"http://127.0.0.1:{port}/api/signup/"
     data = {
         'username': f"user{x}",
         'password': f"pwd{x}",

@@ -3,7 +3,7 @@ Script for poulate db with tags for
 testing and development purposes.
 """
 
-def db_tags():
+def tags():
     from tags.models import Tags
     tags = [
             "Alternative",
