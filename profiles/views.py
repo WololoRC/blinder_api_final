@@ -220,7 +220,7 @@ def delete_profile(request, profile_id):
         )
 
 @api_view(['GET'])
-def get_feed(request, profile_id):
+def get_random_feed(request, profile_id):
     """
     Get feed!!
 
@@ -235,13 +235,51 @@ def get_feed(request, profile_id):
         like = LikeUsers.objects.get(owner=profile)
         block = BlockedUsers.objects.get(owner=profile)
 
-        this_tags = [item.id for item in like.like_list.all()]
-        this_tags.extend([item.id for item in block.blocked_list.all()])
-        this_tags.extend([profile.id])
+        this_ids = [item.id for item in like.like_list.all()]
+        this_ids.extend([item.id for item in block.blocked_list.all()])
+        this_ids.extend([profile.id])
 
     except (Profile.DoesNotExist, ValidationError):
-        return Response({'error': '{profile_id} is not valid, done be stupid.'})
+        return Response({'error': '{profile_id} is not valid, dont be stupid.'})
 
-    feed = Profile.objects.exclude(id__in=this_tags)
+    feed = Profile.objects.exclude(id__in=this_ids)
+
+    return Response(ProfileSerializer(feed, many=True).data)
+
+@api_view(['GET'])
+def get_feed(request, profile_id):
+    """
+    Get feed!!
+
+    Get a Profile list for populate the feed.
+
+    Returns:
+    On success all Profile by exception of block and likes,
+    thath match almost once with the 'owner_tags' of the main user.
+    Else a error message.
+    """
+    try:
+        profile = Profile.objects.get(id=profile_id)
+        like = LikeUsers.objects.get(owner=profile)
+        block = BlockedUsers.objects.get(owner=profile)
+
+        this_ids = [item.id for item in like.like_list.all()]
+        this_ids.extend([item.id for item in block.blocked_list.all()])
+        this_ids.extend([profile.id])
+
+    except (Profile.DoesNotExist, ValidationError):
+        return Response({'error': '{profile_id} is not valid, dont be stupid.'})
+
+    p_tags = list(profile.owner_tags.all())
+    feed = Profile.objects.exclude(id__in=this_ids)
+    last_profiles = []
+
+    for item in feed.all():
+        for tag in item.owner_tags.all():
+            if tag in p_tags:
+                last_profiles.append(item)
+
+    last_profiles = [item.id for item in last_profiles]
+    feed = Profile.objects.filter(id__in=last_profiles)
 
     return Response(ProfileSerializer(feed, many=True).data)

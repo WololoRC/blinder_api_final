@@ -259,13 +259,24 @@ On success returns Profile like_list, else
 return a ugly error message. <br>
 
 ***
-### `api/profile/feed/<uuid:profile_id>/`
+### `api/profile/random_feed/<uuid:profile_id>/`
 ### METHOD: 'GET'
 
 Get feed <br>
 
-Get a Profile list for populate the feed. <br>
+Get a random Profile list for populate the feed. <br>
 
 Returns:
 On success all Profile excluding the Profiles inside of
 LikeUsers and BlockedUsers, else a error message. <br>
+***
+### `api/profile/feed/<uuid:profile_id>/`
+### METHOD: 'GET'
+
+Get a Profile list for populate the feed. <br>
+
+Returns: <br>
+On success all Profile by exception of block and likes,
+thath match almost once with the 'owner_tags' of the main user.
+Else a error message. <br>
+

@@ -20,5 +20,6 @@ urlpatterns = [
     ),
     path('profile/like_list/update/<uuid:profile_id>/', like_views.update_list),
     path('profile/like_list/<uuid:profile_id>/', like_views.get_list),
-    path('profile/feed/<uuid:profile_id>/', views.get_feed)
+    path('profile/random_feed/<uuid:profile_id>/', views.get_random_feed),
+    path('profile/feed/<uuid:profile_id>/', views.get_feed),
 ]
