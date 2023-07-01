@@ -1,7 +1,7 @@
 # blinder API final
 REST API for Blinder project.
 
-Instructions for development and testing purposes.
+# Quickstart
 
 On the virtualization that you are using install
 ```django```,```djangorestframework```,```requests```
@@ -11,8 +11,6 @@ Then:
 ./manage.py migrate
 ./manage.py runserver
 ```
-
-On `/db_scripts` are some scripts for populate de database. <br>
 
 # Models
 
