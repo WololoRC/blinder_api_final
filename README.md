@@ -12,6 +12,8 @@ Then:
 ./manage.py runserver
 ```
 
+On `/db_scripts` are some scripts for populate de database. <br>
+
 # Models
 
 ## Profiles
