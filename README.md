@@ -28,13 +28,13 @@ A model for User's Profiles, is created on User registration. <br>
 
 `birth_date`: birth date of User, when you create
 a new instance of Profile insert data
-as follows: (%Y/%m/%d).<br>
+as this example: "1990-5-2".<br>
 
 `id`: UUID related to Profile instance.
 
 ## Tags
 
-A Tags model, holds descriptive data about User,
+A Tags model, this is descriptive data about User.
 
 ### Atributes:
 
@@ -43,12 +43,12 @@ A Tags model, holds descriptive data about User,
 
 ## BlockedUsers
 
-A BlockedUsers model, keeps record of blocked users for a main User, this models is referenced
+Keeps record of blocked users of main User, this models is created
 when a User registrates. <br>
 
 ### Atributes:
 
-`owner`: User Profile of main User. <br>
+`owner`: User `Profile` of main User. <br>
 `blocked_list`: A list of Profile instances who the main User dont wants to see. <br>
 
 ## LikeUsers
@@ -58,7 +58,7 @@ registrates.
 
 ### Atributes:
 
-`owner`: User Profile of main User. <br>
+`owner`: User `Profile` of main User. <br>
 `like_list`: A list of Profile instances who the main User like. <br>
 
 ## Chat
@@ -70,18 +70,18 @@ This model is created when two users makes a match. <br>
 
 `user_one`: Some User.
 `user_two`: Another User.
-`messages`: A list with Message instances.
+`messages`: A list with `Message` instances.
 `id`: a UUID.
 
 ## Message
 
-A model to record messages witihn two users, goes inside Chat table. <br>
+A model to record messages witihn two users, goes inside Chat Model. <br>
 
 ### Atributes:
 
 `sender`: Who sends the message.
 `reciever`: Who recieves the message.
-`created_at`: Time for creation.
+`created_at`: Creation time.
 
 # Documentation.
 
@@ -109,14 +109,14 @@ Get User Authentication.
 
 ### Returns:<br>
 User's Profile Authentication Token,  username and id on success.
-Else a error message if fails.<br>
+Else a error message.<br>
 ***
 
 ### `/profile/<uuid:profile_id>/`<br>
 ### METHODS: `GET`, `PUT`.
 
 `PUT`:<br>
-Update Profile tags and description, send a payload on body
+Update Profile tags and description, a payload on body
 request with fields:<br>
 
 `remove_tags: <Tag's UUID's'>` delete tags. <br>
@@ -124,6 +124,8 @@ request with fields:<br>
 `add_tags: <Tag's UUID's>` add tags. <br>
 
 `description: <str>`. change description. <br>
+
+are required.
 
 ### Returns: <br>
 On success a updated Profile instance data, else an error message. <br>
@@ -142,7 +144,7 @@ User's Profile data on success, else a error message.<br>
 Delete a Profile instance. <br>
 
 ### Returns: <br>
-On success return a http 204 status or a error message if fails. <br>
+On success return a http 204 status, else a error message. <br>
 ***
 
 ### `/api/tags/` <br>
@@ -159,11 +161,11 @@ All Tags instaces.<br>
 ### `api/profile/blocked_list/<uuid:profile_id>/` <br>
 ### METHOD: `GET`. <br>
 
-Get data from User BlockedUsers table.
+Get data from User `BlockedUsers` model.
 
 ### Returns: <br>
-A dict of blocked users with key's value's {<user.name>: <user.id>}
-from BlockedUsers table.
+A dict of blocked users with keys/value: {<user.name>: <user.id>}
+from BlockedUsers model, else a error message..
 ***
 
 ### `api/profile/blocked_list/update/<uuid:profile_id>/` <br>
@@ -180,25 +182,25 @@ a error message if 'profile_id' or 'id_list' have
 invalid data. <br>
 
 `PUT`: <br>
-Add Users to BlockedUsers main User table. <br>
+Add Users to `BlockedUsers` main User table. <br>
 
 `DELETE`: <br>
-Remove Users of BlockedUsers main User Table. <br>
+Remove Users of `BlockedUsers` main User Table. <br>
 
 ***
 # Messages Functionality
 
 ### `api/chat/<uuid:chat_id>/` <br>
-### METHODS: `PUT`, `DELETE`.
+### METHODS: `GET`, `DELETE`.
 
 `GET`: <br>
-Get a Chat instance by his 'chat_id'. <br>
+Get a `Chat` instance by 'chat_id'. <br>
 
 Returns: <br>
-A Chat instance on success, a error message if fails. <br>
+A `Chat` instance on success, a error message if fails. <br>
 
 `DELETE`: <br>
-Deletes a Chat instance by his 'chat_id'. <br>
+Deletes a `Chat` instance by 'chat_id'. <br>
 
 Returns: <br>
 A success nessage on successm, a error message if fails. <br>
@@ -207,12 +209,13 @@ A success nessage on successm, a error message if fails. <br>
 ### `api/chat/messages/<uuid:chat_id>/`
 ### METHOD: `PUT`.
 
-Put a new message in a Chat instance. <br>
+Put a new message in a `Chat` instance. <br>
 
-A 'chat_id' and a payload with these fiels is required: <br>
+A 'chat_id' and a payload with fields: <br>
 'sender': A profile UUID who sends the message. <br>
 'reciever': A profile UUID who recieve the message. <br>
 'msg_content': A string with the content of message. <br>
+are required. <br>
 
 Returns: <br>
 A updated Chat instance on success,
@@ -222,7 +225,7 @@ a ugly error message if fails. <br>
 ### `api/chat/inbox/<uuid:profile_id>/`
 ### METHOD: `GET`
 
-Get al Chat instance related to a Profile. <br>
+Get all `Chat` instance related to a `Profile`. <br>
 
 A valid 'profile_id' on url is required. <br>
 
