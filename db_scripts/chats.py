@@ -45,7 +45,7 @@ with open('user_tokens.json', 'r', encoding='utf-8') as a_file:
 for item in user_list:
     id_list.append(item.get('id'))
     cnt += 1
-    if cnt == 5:
+    if cnt == 250:
         break
 
 match_making(id_list)
